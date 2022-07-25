@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ricardo.fellini.librarycontrol.enums.Language;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -29,12 +31,17 @@ public class Book {
     @Column(name = "isbn", length = 50, nullable = false, unique = true)
     private String isbn;
 
-    //TODO para ENUM, linguagens pre cadastradas em um ENUM, consistencia
-    private String language;
+    @Column(name = "dateAdded", nullable = false)
+    private LocalDateTime dateAdded;
 
+    @Column(name = "dateLastReserved")
+    private LocalDateTime dateLastReserved;
+
+    @Enumerated(EnumType.STRING)
+    private Language language;
 
     //TODO para buscar do editor, assim podemos cadastrar editores e filtrar quando precisar
-    private String editor;
+    private String publisher;
 
     //TODO para cadastrar autor separado, dessa forma evita duplicacao de autor no banco de dados
     private String author;
@@ -45,6 +52,6 @@ public class Book {
     private String urlImage;
 
     //TODO verificar o cadastro de generos aqui tbm
-    private String genre;
+    private String category;
 
 }
